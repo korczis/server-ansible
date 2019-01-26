@@ -1,0 +1,8 @@
+---
+
+- name: install mosh
+  package:
+    name: mosh
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"

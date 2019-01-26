@@ -1,0 +1,5 @@
+---
+
+- name: upgrade os
+  yum: name=* state=latest
+  when: ansible_distribution == "CentOS"

@@ -1,0 +1,8 @@
+---
+
+- name: install postgis
+  package:
+    name: postgis2_96
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
