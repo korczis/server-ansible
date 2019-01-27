@@ -1,5 +1,40 @@
 ---
 
+- name: install geos-devel
+  package:
+    name: geos-devel
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
+
+- name: install proj-devel
+  package:
+    name: proj-devel
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
+
+- name: install gdal-devel
+  package:
+    name: gdal-devel
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
+
+- name: install libxml2-devel
+  package:
+    name: libxml2-devel
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
+
+- name: install json-c-devel
+  package:
+    name: json-c-devel
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
+
 - name: install postgis
   package:
     name: postgis2_96
