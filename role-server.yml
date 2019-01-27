@@ -7,12 +7,14 @@
     - epel-repository
     - os-upgrade
     - curl
+    - fail2ban
+    - git
     - htop
     - mc
     - mosh
     - nmap
-    - postgres
     - postgis
+    - postgres
     - rust
     - tmux
     - wget

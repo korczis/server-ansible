@@ -1,0 +1,36 @@
+---
+
+- name: install fail2ban
+  package:
+    name: fail2ban
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
+
+- name: install fail2ban-firewalld
+  package:
+    name: fail2ban-firewalld
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
+
+- name: install fail2ban-hostsdeny
+  package:
+    name: fail2ban-hostsdeny
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
+
+- name: install fail2ban-server
+  package:
+    name: fail2ban-server
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
+
+- name: install fail2ban-systemd
+  package:
+    name: fail2ban-systemd
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
