@@ -4,5 +4,6 @@
   package:
     name: mosh
     state: present
-    update_cache: yes
-  when: ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
+
+- name: open mosh ports
+  firewalld: port=60000-61000/udp zone=public permanent=true state=enabled immediate=yes
