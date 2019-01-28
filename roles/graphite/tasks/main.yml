@@ -1,0 +1,34 @@
+---
+
+- name: install graphite2
+  package:
+    name: graphite2
+    state: present
+
+- name: install graphite-api
+  package:
+    name: graphite-api
+    state: present
+
+- name: install carbonate
+  package:
+    name: carbonate
+    state: present
+
+- name: Set collectd_tcp_network_connect flag on and keep it persistent across reboots
+  seboolean:
+    name: collectd_tcp_network_connect
+    state: yes
+    persistent: yes
+
+- name: enable and start graphite-api
+  service:
+    name: graphite-api
+    enabled: yes
+    state: restarted
+
+- name: enable and start carbon-cache
+  service:
+    name: carbon-cache
+    enabled: yes
+    state: restarted
