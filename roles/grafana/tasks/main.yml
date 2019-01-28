@@ -1,0 +1,39 @@
+---
+
+- name: install initscripts
+  package:
+    name: initscripts
+    state: present
+
+- name: install fontconfig
+  package:
+    name: fontconfig
+    state: present
+
+- name: install grafana
+  yum:
+    name: https://dl.grafana.com/oss/release/grafana-5.4.2-1.x86_64.rpm
+    state: present
+  when: ansible_distribution == "CentOS"
+
+- name: copy grafana.ini
+  copy:
+    src: ./files/grafana.ini
+    dest: /etc/grafana/grafana.ini
+    owner: root
+    group: grafana
+    mode: 0640
+
+- name: enable grafana-server, and not touch the state
+  service:
+    name: grafana-server
+    enabled: yes
+
+- name: start grafana-server, if not started
+  service:
+    name: grafana-server
+    state: started
+
+- name: open grafana-server ports
+  firewalld: port=3000/tcp zone=public permanent=true state=enabled immediate=yes
+
