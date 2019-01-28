@@ -1,8 +1,8 @@
 ---
 
-- name: install htop
+- name: install atomic
   package:
-    name: htop
+    name: atomic
     state: present
     update_cache: yes
   when: ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
