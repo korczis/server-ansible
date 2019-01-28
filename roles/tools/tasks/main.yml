@@ -1,0 +1,11 @@
+---
+
+- name: install links
+  package:
+    name: links
+    state: present
+
+- name: install lynx
+  package:
+    name: links
+    state: present
