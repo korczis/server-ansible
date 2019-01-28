@@ -23,12 +23,8 @@
     group: root
     mode: 0644
 
-- name: enable collectd, and not touch the state
+- name: enable and start collectd
   service:
     name: collectd
     enabled: yes
-
-- name: start collectd, if not started
-  service:
-    name: collectd
-    state: started
+    state: restarted
