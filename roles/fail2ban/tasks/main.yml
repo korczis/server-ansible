@@ -43,6 +43,14 @@
     group: root
     mode: 0644
 
+- name: copy jail.local
+  copy:
+    src: ./files/jail.local
+    dest: /etc/fail2ban/jail.local
+    owner: root
+    group: root
+    mode: 0644
+
 - name: enable fail2ban, and not touch the state
   service:
     name: fail2ban
