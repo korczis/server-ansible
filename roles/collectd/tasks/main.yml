@@ -1,0 +1,34 @@
+---
+
+- name: install rrdtool
+  package:
+    name: rrdtool
+    state: present
+
+- name: install rrdtool-devel
+  package:
+    name: rrdtool-devel
+    state: present
+
+- name: install collectd
+  package:
+    name: collectd
+    state: present
+
+- name: copy collectd.conf
+  copy:
+    src: ./files/collectd.conf
+    dest: /etc/collectd.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: enable collectd, and not touch the state
+  service:
+    name: collectd
+    enabled: yes
+
+- name: start collectd, if not started
+  service:
+    name: collectd
+    state: started
