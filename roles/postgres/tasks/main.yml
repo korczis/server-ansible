@@ -9,3 +9,43 @@
     name: postgresql96-server
     enablerepo: "epel"
   when: ansible_distribution == "CentOS"
+
+- name: install psycopg2
+  package:
+    name: python-psycopg2
+    state: present
+
+- name: initialize databaze
+  become: true
+  command: /usr/pgsql-9.6/bin/postgresql96-setup initdb
+           creates=/var/lib/pgsql/9.6/data/postgresql.conf
+
+- name: copy pg_hba.conf
+  template:
+    src: pg_hba.conf.j2
+    dest: /var/lib/pgsql/9.6/data/pg_hba.conf
+    owner: postgres
+    group: postgres
+    mode: 0600
+
+- name: enable and start postgresql_96-server
+  service:
+    name: postgresql-9.6
+    enabled: yes
+    state: restarted
+
+- name: create database - acme
+  postgresql_db:
+    name: acme
+
+- name: create user - nouma
+  postgresql_user:
+    db: acme
+    name: nouma
+    password: nouma
+    # remote_user: postgres
+    # priv: "ALL"
+    expires: "Jan 31 2020"
+
+- name: open postgresql ports
+  firewalld: port=5432/tcp zone=public permanent=true state=enabled immediate=yes
