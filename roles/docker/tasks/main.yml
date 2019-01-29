@@ -40,11 +40,14 @@
 
 - name: Download and install Docker Compose
   get_url:
-    url: https://github.com/docker/compose/releases/download/1.21.2/docker-compose-Linux-x86_64
+    url: https://github.com/docker/compose/releases/download/1.23.2/docker-compose-Linux-x86_64
     dest: /usr/bin/docker-compose
     mode: 0755
   when:
     - docker_compose_check.msg is defined
     - docker_compose_check.msg.find('No such file or directory') != -1
 
-
+- name: install python-docker-py
+  package:
+    name: python-docker-py
+    state: present
