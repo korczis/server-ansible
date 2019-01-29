@@ -8,7 +8,7 @@
     # network_mode: "host"
     # pid_mode: "host"
     command: "--probe.docker=true --weave=false"
-    recreate: true
+    restart_policy: "unless-stopped"
     labels:
       "works.weave.role": "system"
     published_ports:

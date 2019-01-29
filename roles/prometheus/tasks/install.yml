@@ -127,3 +127,6 @@
   when:
     - ansible_version.full is version_compare('2.4', '>=')
     - ansible_selinux.status == "enabled"
+
+- name: open prometheus ports
+  firewalld: port=9090/tcp zone=public permanent=true state=enabled immediate=yes

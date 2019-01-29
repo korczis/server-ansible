@@ -25,6 +25,11 @@
     name: mc
     state: present
 
+- name: install mlocate
+  package:
+    name: mlocate
+    state: present
+
 - name: install tmux
   package:
     name: tmux

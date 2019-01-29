@@ -52,13 +52,35 @@ prometheus_external_labels:
   environment: "{{ ansible_fqdn | default(ansible_host) | default(inventory_hostname) }}"
 
 prometheus_targets: {}
-#  node:
-#    - targets:
-#        - localhost:9100
-#      labels:
-#        env: test
+#   node:
+#     - targets:
+#         - localhost:9090
+#       labels:
+#         env: test
 
-# prometheus_scrape_configs: {}
+prometheus_scrape_configs:
+  - job_name: "prometheus"
+    metrics_path: "{{ prometheus_metrics_path }}"
+    static_configs:
+      - targets:
+        - localhost:9090 # "{{ ansible_fqdn | default(ansible_host) | default('localhost') }}:9090"
+
+  # - job_name: "node"
+  #   file_sd_configs:
+  #     - files:
+  #       - "{{ prometheus_config_dir }}/file_sd/node.yml"
+
+  - job_name: "cadvisor"
+    scrape_interval: 5s
+    static_configs:
+      - targets:
+        - localhost:8080
+
+  - job_name: "grafana"
+    scrape_interval: 5s
+    static_configs:
+      - targets:
+          - localhost:3000
 
 # Alternative config file name, searched in ansible templates path.
 prometheus_config_file: 'prometheus.yml.j2'
