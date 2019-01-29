@@ -58,7 +58,7 @@ prometheus_targets: {}
 #      labels:
 #        env: test
 
-prometheus_scrape_configs: {}
+# prometheus_scrape_configs: {}
 
 # Alternative config file name, searched in ansible templates path.
 prometheus_config_file: 'prometheus.yml.j2'

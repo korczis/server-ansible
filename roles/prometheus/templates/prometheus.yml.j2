@@ -7,3 +7,5 @@ global:
   external_labels:
     {{ prometheus_external_labels | to_nice_yaml(indent=2) | indent(4, False) }}
 
+rule_files:
+  - {{ prometheus_config_dir }}/rules/*.rules

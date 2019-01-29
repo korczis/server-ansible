@@ -1,0 +1,17 @@
+---
+
+- name: create weave-scope container
+  docker_container:
+    name: weave-scope
+    image:  "weaveworks/scope:latest"
+    privileged: true
+    # network_mode: "host"
+    # pid_mode: "host"
+    command: "--probe.docker=true --weave=false"
+    recreate: true
+    labels:
+      "works.weave.role": "system"
+    published_ports:
+      - "4040:4040"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:rw"
