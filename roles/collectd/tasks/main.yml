@@ -1,19 +1,28 @@
 ---
 
+- name: install libsemanage-python
+  package:
+    name: libsemanage-python
+    state: present
+    update_cache: yes
+
 - name: install rrdtool
   package:
     name: rrdtool
     state: present
+    update_cache: yes
 
 - name: install rrdtool-devel
   package:
     name: rrdtool-devel
     state: present
+    update_cache: yes
 
 - name: install collectd
   package:
     name: collectd
     state: present
+    update_cache: yes
 
 - name: copy collectd.conf
   copy:
@@ -22,6 +31,12 @@
     owner: root
     group: root
     mode: 0644
+
+- name: Set collectd_tcp_network_connect flag on and keep it persistent across reboots
+  seboolean:
+    name: collectd_tcp_network_connect
+    state: yes
+    persistent: yes
 
 - name: enable and start collectd
   service:
