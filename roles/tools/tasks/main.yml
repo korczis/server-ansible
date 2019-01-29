@@ -1,5 +1,15 @@
 ---
 
+- name: install curl
+  package:
+    name: curl
+    state: present
+
+- name: install htop
+  package:
+    name: htop
+    state: present
+
 - name: install links
   package:
     name: links
@@ -8,4 +18,29 @@
 - name: install lynx
   package:
     name: links
+    state: present
+
+- name: install mc
+  package:
+    name: mc
+    state: present
+
+- name: install tmux
+  package:
+    name: tmux
+    state: present
+
+- name: install vim
+  package:
+    name: vim
+    state: present
+
+- name: install wget
+  package:
+    name: wget
+    state: present
+
+- name: install whois
+  package:
+    name: jwhois
     state: present
