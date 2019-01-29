@@ -1,3 +1,3 @@
 #! /usr/bin/env bash
 
-ansible-playbook -i inventory.ini -v "$@" role-test.yml
+ansible-playbook -v "$@" role-test.yml
