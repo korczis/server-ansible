@@ -1,21 +1,24 @@
----
 - hosts: all
-  sudo: yes
+  become: yes
   gather_facts: yes
   remote_user: root
+  debugger: never # always | never | on_failed | on_unreachable | on_skipped
   roles:
     - epel-repository
     - os-upgrade
-    - curl
+    # - atomic
+    - collectd
     - docker
+    - docker-cadvisor
+    # - docker-elk
     - fail2ban
-    - git
-    - htop
-    - mc
+    # - git
+    - grafana
+    - graphite
     - mosh
-    - nmap
-    - postgis
-    - postgres
-    - rust
-    - tmux
-    - wget
+    # - nmap
+    # - postgis
+    # - postgres
+    # - rust
+    - tools
+    - whois

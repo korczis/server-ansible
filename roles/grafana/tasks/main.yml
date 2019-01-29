@@ -1,14 +1,22 @@
 ---
 
-- name: install initscripts
-  package:
-    name: initscripts
-    state: present
-
 - name: install fontconfig
   package:
     name: fontconfig
     state: present
+    update_cache: yes
+
+- name: install freetype
+  package:
+    name: freetype*
+    state: present
+    update_cache: yes
+
+- name: install urw-fonts
+  package:
+    name: urw-fonts
+    state: present
+    update_cache: yes
 
 - name: install grafana
   yum:
@@ -24,15 +32,64 @@
     group: grafana
     mode: 0640
 
-- name: enable grafana-server, and not touch the state
+- name: install app plugin - raintank-worldping-app
+  grafana_plugin:
+    name: raintank-worldping-app
+    version: latest
+    state: present
+
+- name: install panel plugin - satellogic-3d-globe
+  grafana_plugin:
+    name: satellogic-3d-globe-panel
+    version: latest
+    state: present
+
+- name: install panel plugin - piechart
+  grafana_plugin:
+    name: grafana-piechart-panel
+    version: latest
+    state: present
+
+- name: install panel plugin - worldmap
+  grafana_plugin:
+    name: grafana-worldmap-panel
+    version: latest
+    state: present
+
+- name: create datasource - graphite-local
+  grafana_datasource:
+    name: "graphite-local"
+    grafana_url: "http://localhost:3000"
+    grafana_user: "admin"
+    grafana_password: "admin"
+    ds_type: "graphite"
+    url: "http://localhost:8888"
+    is_default: true
+
+- name: create datasource - prometheus-local
+  grafana_datasource:
+    name: "prometheus-local"
+    grafana_url: "http://localhost:3000"
+    grafana_user: "admin"
+    grafana_password: "admin"
+    ds_type: "prometheus"
+    url: "http://localhost:9090"
+    is_default: false
+
+# - name: import dashboard - server-basic
+#   grafana_dashboard:
+#     grafana_url: "http://localhost:3000"
+#     grafana_user: "admin"
+#     grafana_password: "admin"
+#     state: present
+#     overwrite: yes
+#     path: ./files/dashboards/server-basic.json
+
+- name: enable and start grafana-server
   service:
     name: grafana-server
     enabled: yes
-
-- name: start grafana-server, if not started
-  service:
-    name: grafana-server
-    state: started
+    state: restarted
 
 - name: open grafana-server ports
   firewalld: port=3000/tcp zone=public permanent=true state=enabled immediate=yes

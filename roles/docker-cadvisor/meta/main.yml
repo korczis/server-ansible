@@ -29,12 +29,6 @@ galaxy_info:
       versions:
         - 7
         - 6
-  # - name: SomePlatform
-  #   versions:
-  #   - all
-  #   - 1.0
-  #   - 7
-  #   - 99.99
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes
@@ -45,5 +39,4 @@ galaxy_info:
   #       Maximum 20 tags per role.
 
 dependencies:
-  - graphite
-  - prometheus
+  - docker
