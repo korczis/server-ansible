@@ -19,6 +19,6 @@
     - mosh
     # - nmap
     # - postgis
-    # - postgres
+    - postgres
     # - rust
     - tools
